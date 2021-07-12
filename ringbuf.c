@@ -120,7 +120,7 @@ char *ringbuf_read(ringbuf_t *self, unsigned int len)
     {
         len = self->valid_len;
     }
-    char *buffer = (char *)malloc(sizeof(char) * len);
+    char *buffer = (char *)malloc(sizeof(char) * len + 1);
     if (buffer == NULL)
     {
         return NULL;
@@ -140,5 +140,6 @@ char *ringbuf_read(ringbuf_t *self, unsigned int len)
         self->valid_head += len;
     }
     self->valid_len -= len;
+    buffer[len] = '\0';
     return buffer;
 }
